@@ -1,12 +1,14 @@
 ---
-import { getCollection } from "astro:content";
-
+import BlogPost from "../components/BlogPost.astro";
 import MainLayout from "../layouts/MainLayout.astro";
 
 import { siteConfig } from "../config/site-config";
-import TypedBlogPost from "src/components/TypedBlogPost.astro";
 
-const posts = await getCollection("blog", (post) => !post.data.isDraft);
+const posts = Object.values(
+  import.meta.glob("./posts-old/*.{md,mdx}", {
+    eager: true,
+  })
+);
 ---
 
 <MainLayout title="My blog">
@@ -17,19 +19,9 @@ const posts = await getCollection("blog", (post) => !post.data.isDraft);
         {siteConfig.title}
       </h1>
 
-      <a class="mr-2" href="/blog/1">Blog Pagination</a>
-      <a class="mr-2" href="/authors">Author List</a>
-
       <div class="grid grid-cols-1 gap-8 mt-8 md:mt-16 md:grid-cols-2">
-        {posts.map((post) => <TypedBlogPost post={post} />)}
+        {posts.map((post: any) => <BlogPost {...post} />)}
       </div>
     </div>
   </section>
 </MainLayout>
-
-<style>
-  @reference "tailwindcss";
-  a {
-    @apply text-blue-500 hover:underline;
-  }
-</style>
