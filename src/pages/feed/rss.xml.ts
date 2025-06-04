@@ -21,7 +21,7 @@ export const GET: APIRoute = async ({ params, request, site }) => {
         title: post.data.title,
         pubDate: post.data.date,
         description: post.data.description,
-        link: `/post/${post.id}`
+        link: `/posts/${post.id}`
     })),
     // (optional) inject custom xml
     customData: `<language>es-mx</language>`,
