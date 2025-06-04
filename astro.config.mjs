@@ -12,5 +12,5 @@ export default defineConfig({
   },
 
   integrations: [mdx()],
-  site: "https://elyxcode-blog.netlify.app/",
+  site: "https://elyxcode-blog.netlify.app",
 });
